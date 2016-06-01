@@ -9,8 +9,10 @@
     html {
     	height: 100%;
     }
+    body {
+    	margin: 0;
+    }
     .sprite-animation {
-        margin: 0 auto;
         position: relative;
         overflow: hidden;
     }
@@ -19,11 +21,24 @@
         height: 300px;
         width: 200px;
     }
+
+    .logo {
+    	transition: cubic-bezier(0.38, 0.44, 0.45, 1) all 0.6s;
+    	position: absolute;
+    	left: 50%;
+    	top: 50%;
+    	transform: translate(-50%, -50%);
+    }
+    .logo.corner {
+    	left: 0;
+    	top: 0;
+    	transform: translate(-23%, -38%) scale(0.5);
+    }
     </style>
 </head>
 
 <body>
-    <div class="sprite-animation">
+    <div class="logo sprite-animation">
         <div>
             <img width="960px" height="300px" src="images/all2.png">
         </div>
@@ -42,6 +57,9 @@
         $(window).on('load', function() {
         	setTimeout(function() {
 	           	logo.play();
+	           	logo.onComplete = function() {
+	           		$('.logo').addClass('corner');
+	           	}
 	           	$('.lightMyFire').css('opacity', 1);
         	}, 500);
         });

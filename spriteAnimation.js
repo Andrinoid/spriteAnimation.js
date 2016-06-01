@@ -169,9 +169,12 @@ var Animloop = (function() {
         this.conveyor.css('left', -frame * 100 + '%');
     }
 
+    Animloop.prototype.onComplete = function() {}
+
     Animloop.prototype.stop = function() {
         this.goToFrame(this.options.mainFrames[1]);
         cancelAnimationFrame(this.requestId);
+        this.onComplete();
     }
 
     return Animloop;
