@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sprite animation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
+    <script src="../spriteAnimation.js"></script>
+    <style>
+    .sprite-animation {
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .sprite-animation {
+        height: 600px;
+        width: 600px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="sprite-animation">
+        <div>
+            <img width="28800px" height="600px" src="images/all.png">
+        </div>
+    </div>
+    <script>
+
+        var logo = new Animloop($('.sprite-animation'), {
+            addPolyfills: true,
+            framesPerSecond: 17,
+            framesPerImage: 48,
+            idleFrames: [0, 48, 1],
+            mainFrames: [],
+            totalLoops: 1,
+        });
+
+        $(window).on('load', function() {
+            logo.play();
+        });
+    </script>
+</body>
+
+</html>

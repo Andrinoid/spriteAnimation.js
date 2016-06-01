@@ -20,10 +20,20 @@ var requestAnimationFrame = (function() {
         };
 })();
 
+//extend Object
+var extend = function () {
+    for (var i = 1; i < arguments.length; i++)
+        for (var key in arguments[i])
+            if (arguments[i].hasOwnProperty(key))
+                arguments[0][key] = arguments[i][key];
+    return arguments[0];
+};
+
 var Animloop = (function() {
     function Animloop(viewPort, options) {
         var self = this;
-        this.options = _.extend({
+        this.options = {};
+        this.options = extend({
             framesPerSecond: 13,
             framesPerImage: 4,
             idleFrames: [0, 8, 5], //from, to, loops
@@ -31,6 +41,8 @@ var Animloop = (function() {
             totalLoops: 1
         }, options);
 
+        console.log(this.options);
+   
         //vars
         this.viewPort = viewPort;
         this.startFrame = 0;
