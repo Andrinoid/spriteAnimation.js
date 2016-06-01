@@ -6,6 +6,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
     <script src="../spriteAnimation.js"></script>
     <style>
+    html {
+    	height: 100%;
+    }
     .sprite-animation {
         margin: 0 auto;
         position: relative;
@@ -13,8 +16,8 @@
     }
     
     .sprite-animation {
-        height: 600px;
-        width: 600px;
+        height: 300px;
+        width: 200px;
     }
     </style>
 </head>
@@ -22,22 +25,25 @@
 <body>
     <div class="sprite-animation">
         <div>
-            <img width="28800px" height="600px" src="images/all.png">
+            <img width="960px" height="300px" src="images/all2.png">
         </div>
     </div>
     <script>
 
         var logo = new Animloop($('.sprite-animation'), {
-            addPolyfills: true,
             framesPerSecond: 17,
             framesPerImage: 48,
-            idleFrames: [0, 48, 1],
-            mainFrames: [],
+            idleFrames: [0, 8, 1, 11],
+            mainFrames: [9, 46, 1, 17],
             totalLoops: 1,
         });
 
+
         $(window).on('load', function() {
-            logo.play();
+        	setTimeout(function() {
+	           	logo.play();
+	           	$('.lightMyFire').css('opacity', 1);
+        	}, 500);
         });
     </script>
 </body>

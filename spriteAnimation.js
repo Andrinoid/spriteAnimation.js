@@ -41,7 +41,6 @@ var Animloop = (function() {
             totalLoops: 1
         }, options);
 
-        console.log(this.options);
    
         //vars
         this.viewPort = viewPort;
@@ -99,6 +98,7 @@ var Animloop = (function() {
 
     Animloop.prototype.idleAnimation = function() {
         this.state = 'idle';
+        this.options.framesPerSecond = this.options.idleFrames[3];
         this.endFrame = (this.options.idleFrames[1] - this.options.idleFrames[0]) * this.options.idleFrames[2];
         this.loopEnd = this.options.idleFrames[1] - this.options.idleFrames[0]; //
         this.startFrame = this.options.idleFrames[0];
@@ -109,6 +109,7 @@ var Animloop = (function() {
 
     Animloop.prototype.mainAnimation = function() {
         this.state = 'main';
+        this.options.framesPerSecond = this.options.mainFrames[3];
         this.endFrame = (this.options.mainFrames[1] - this.options.mainFrames[0]) * this.options.mainFrames[2];
         this.startFrame = this.options.mainFrames[0];
         this.totalFrames = this.options.mainFrames[1] - this.options.mainFrames[0];
@@ -127,10 +128,12 @@ var Animloop = (function() {
         var frame = Math.floor(time * this.options.framesPerSecond);
 
         if (frame >= this.endFrame) {
-            this.switchState();
             this.totalLoopsCounter = this.totalLoopsCounter + 0.5;
             if(this.totalLoopsCounter === this.options.totalLoops) {
                 this.isStop = true;
+            }
+            else {
+                this.switchState();
             }
 
         } else {
@@ -167,6 +170,7 @@ var Animloop = (function() {
     }
 
     Animloop.prototype.stop = function() {
+        this.goToFrame(this.options.mainFrames[1]);
         cancelAnimationFrame(this.requestId);
     }
 
